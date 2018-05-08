@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>谢谢给我留言</title>
+</head>
+<body>
+<!--Hello World !
+This is a index.-->
+<!--输入微信号获取姓名及其详细信息(详细信息需要管理员权限)：
+<input type="text" class="form-control" name="name" id="name" placeholder="微信号">
+<button id="btn">提交</button>-->
+如果你有什么想对我说的话，就在这里说吧，我会看到的<br/>
+<textarea id="context" rows="5" cols="55"></textarea>
+<br/>
+<button id="btn">提交</button>
+</body>
+<script type="text/javascript" src="./js/jquery-1.11.0.js"></script>
+<script type="text/javascript">
+var btn=document.getElementById('btn');
+btn.onclick=function(){
+    var msg = new Object();
+    msg.context = $("#context").val();
+    $.ajax({
+        type: "post",
+        //url: "http://39.107.118.220:8080/testdb",//线上
+        contentType: "application/json;charset=UTF-8",
+        url: "http://39.107.118.220:8080/msg",//线上
+        cache: false,//不保存缓存
+        dataType: "json",
+        data: JSON.stringify(msg),//dfjsdkfj
+        async: true,
+        success: function (data) {
+            console.log(data);
+            alert("success");
+        },
+        error: function () {
+            alert("failed");
+            console.log("failed");
+        }
+    });
+};
+/*btn.onclick=function(){
+    var name = document.getElementById("name").value;
+    if(name == 'LK503291938'){
+        alert("李可");
+    }else {
+        alert("您无权限查看改微信信息");
+    }
+}*/
+</script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>student</title>
+    <script src="js/jquery-1.11.0.js"></script>
+</head>
+<body>
+<button id="btn">提交</button>
+<input type="text" class="form-control" name="name" id="id" placeholder="id">
+<input type="text" class="form-control" name="name" id="name" placeholder="name">
+<button id="btnAdd">新增</button>
+</body>
+<script type="text/javascript" src="./js/jquery-1.11.0.js"></script>
+<script type="text/javascript">
+    var btn=document.getElementById('btn');
+    btn.onclick=function(){
+        $.ajax({
+            type: "GET",
+            //url: "http://39.107.118.220:8080/testdb",//线上
+            url: "http://localhost:8080/student",//线上
+            cache: false,//不保存缓存
+            dataType: "json",
+            async: true,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function () {
+                console.log("failed");
+            }
+        });
+    };
+
+    var btnAdd=document.getElementById('btnAdd');
+
+    btnAdd.onclick=function(){
+        var stu = new Object();
+        stu.id = $("#id").val();
+        stu.name = $("#name").val();
+        $.ajax({
+            type: "post",
+            //url: "http://39.107.118.220:8080/testdb",//线上
+            contentType: "application/json;charset=UTF-8",
+            url: "http://localhost:8080/student",//线上
+            cache: false,//不保存缓存
+            dataType: "json",
+            data: JSON.stringify(stu),//dfjsdkfj
+            async: true,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function () {
+                console.log("failed");
+            }
+        });
+    };
+</script>
+</html>
